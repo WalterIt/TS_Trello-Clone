@@ -5,7 +5,7 @@ import LocalFont from "next/font/local";
 import {Poppins} from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const headingFont = LocalFont({
+export const headingFont = LocalFont({
     src: "../../public/fonts/font.woff2",
 })
 

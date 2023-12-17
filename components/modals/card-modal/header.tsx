@@ -22,7 +22,11 @@ export const Header = ({ data }: HeaderProps) => {
     const { execute } = useAction(updateCard, {
         onSuccess: (data) => {
             queryClient.invalidateQueries({
-                queryKey: ["cards", data.id],
+                queryKey: ["card", data.id],
+            });
+
+            queryClient.invalidateQueries({
+                queryKey: ["card-logs", data.id],
             })
 
             toast.success(`Card renamed to "${data.title}"!`)

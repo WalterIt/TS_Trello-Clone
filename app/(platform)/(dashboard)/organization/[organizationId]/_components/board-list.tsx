@@ -8,6 +8,8 @@ import { auth } from "@clerk/nextjs";
 import { HelpCircle, User2 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { MAX_FREE_BOARDS } from "@/constants/boards";
+import { getAvailableBoards } from "@/lib/org-limit";
 
 
 export const BoardList = async () => {
@@ -16,13 +18,11 @@ export const BoardList = async () => {
     if (!orgId) redirect("/select-org");
 
     const boards = await db.board.findMany({
-        where: {
-            orgId,
-        },
-        orderBy: {
-            createdAt: 'desc'
-        },
+        where: { orgId, },
+        orderBy: { createdAt: 'desc' },
     })
+
+    const availableBoards = await getAvailableBoards();
 
     return (
         <div className="space-y-4">
@@ -52,7 +52,7 @@ export const BoardList = async () => {
                             Create New Board
                         </p>
                         <span className="text-xs">
-                            5 Remaining
+                            {`${MAX_FREE_BOARDS - availableBoards} remaining!`}
                         </span>
                         <Hint
                         sideOffset={40}

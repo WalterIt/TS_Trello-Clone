@@ -22,7 +22,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     let card;
 
     try {
-        card = await db.card.delete({
+        card = await db.card.delete({ 
             where: {
                 id,
                 list: {
@@ -32,6 +32,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                 }
             }
         });
+
 
         await createAuditLog({
             entityTitle: card.title,

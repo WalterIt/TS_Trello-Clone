@@ -1,8 +1,11 @@
-import { headingFont } from "@/app/(marketing)/page"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
+import localFont from "next/font/local";
 
+const headingFont = localFont({
+  src: "../public/fonts/font.woff2",
+});
 
 export const Logo = () => {
     return (

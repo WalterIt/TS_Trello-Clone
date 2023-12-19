@@ -10,6 +10,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { MAX_FREE_BOARDS } from "@/constants/boards";
 import { getAvailableBoards } from "@/lib/org-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 
 export const BoardList = async () => {
@@ -23,6 +24,7 @@ export const BoardList = async () => {
     })
 
     const availableBoards = await getAvailableBoards();
+    const isPro = await checkSubscription();
 
     return (
         <div className="space-y-4">
@@ -52,7 +54,7 @@ export const BoardList = async () => {
                             Create New Board
                         </p>
                         <span className="text-xs">
-                            {`${MAX_FREE_BOARDS - availableBoards} remaining!`}
+                            {isPro ? "Unlimited" : `${MAX_FREE_BOARDS - availableBoards} remaining!`}
                         </span>
                         <Hint
                         sideOffset={40}

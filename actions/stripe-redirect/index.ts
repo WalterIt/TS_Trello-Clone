@@ -74,7 +74,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         };
     }
 
-   
+   revalidatePath(`/organization/${orgId}`);
+   return { data: url };
 }
 
 export const stripeRedirect = createSafeAction(StripeRedirect, handler)
